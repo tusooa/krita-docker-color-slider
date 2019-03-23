@@ -89,6 +89,7 @@ class ColorSliderLine(QWidget):
                 mc = self.docker.canvas().view().foregroundColor()
                 print(mc.colorModel(), mc.colorDepth(), mc.colorProfile(), mc.components())
                 self.set_color('left', self.docker.canvas().view().foregroundColor())
+        self.color_slider.value_x = 0 # set the cursor to the left-most
         self.color_slider.update()
         self.docker.writeSettings()
 
@@ -97,5 +98,8 @@ class ColorSliderLine(QWidget):
         if self.docker.canvas() is not None:
             if self.docker.canvas().view() is not None:
                 self.set_color('right', self.docker.canvas().view().foregroundColor())
+        self.color_slider.value_x = self.color_slider.width() - 1
         self.color_slider.update()
         self.docker.writeSettings()
+
+        

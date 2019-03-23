@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QPixmap, QPainter, QColor
+from PyQt5.QtCore import QPoint
 from krita import ManagedColor
 import math
 
@@ -26,9 +27,10 @@ class ColorSlider(QWidget):
         diff_hsva = [(dest_hsva[i] - base_hsva[i]) for i in range(4)]
         if dest_hsva[0] == -1.0:
             diff_hsva[0] = 0
-        elif math.fabs(diff_hsva[0]) > 0.5:
-            # goes a major arc
+        elif diff_hsva[0] > 0.5: # make sure the sliding goes through a minor arc
             diff_hsva[0] = diff_hsva[0] - 1.0
+        elif diff_hsva[0] < -0.5:
+            diff_hsva[0] = diff_hsva[0] + 1.0
 
         step_hsva = [x/patchCount for x in diff_hsva]
             
@@ -59,7 +61,12 @@ class ColorSlider(QWidget):
 
     def mouseReleaseEvent(self, event):
         pos = event.pos()
-        color = self.rendered_image.pixelColor(pos)
+        x = pos.x()
+        if x < 0: x = 0
+        if x >= self.width(): x = self.width() - 1
+        y = int(self.height()/2)
+        fixedPos = QPoint(x, y)
+        color = self.rendered_image.pixelColor(fixedPos)
         mc = self.docker.qcolor_to_managedcolor(color)
         if self.docker.canvas() is not None:
             if self.docker.canvas().view() is not None:

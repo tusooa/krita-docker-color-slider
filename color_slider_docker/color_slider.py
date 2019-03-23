@@ -5,7 +5,7 @@ from krita import ManagedColor
 import math
 
 class ColorSlider(QWidget):
-    default_color = QColor()
+    default_color = ManagedColor("","","")
     def __init__(self, docker, left_color=default_color, right_color=default_color, parent=None):
         super(ColorSlider, self).__init__(parent)
         self.docker = docker

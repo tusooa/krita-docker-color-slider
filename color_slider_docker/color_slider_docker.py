@@ -109,9 +109,9 @@ class Color_Slider_Docker(DockWidget):
         return mc
 
     def managedcolor_to_qcolor(self, managedcolor):
-        [b, g, r, a] = managedcolor.components()
-        return QColor.fromRgbF(r, g, b, a)
-        #return managedcolor.colorForCanvas(self.canvas())
+        #[b, g, r, a] = managedcolor.components()
+        #return QColor.fromRgbF(r, g, b, a)
+        return managedcolor.colorForCanvas(self.canvas())
     
         
     

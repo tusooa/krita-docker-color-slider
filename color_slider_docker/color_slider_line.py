@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.Qt import pyqtSlot, pyqtSignal
+from PyQt5.QtCore import QRect
 
 from .color_slider import ColorSlider
 
@@ -17,7 +18,9 @@ class ColorSliderLine(QWidget):
     def __init__(self, left_color, right_color, docker, parent=None):
         super(ColorSliderLine, self).__init__(parent)
         self.left_button = ColorSliderBtn()
+        self.left_button.setMaximumSize(30, 30)
         self.right_button = ColorSliderBtn()
+        self.right_button.setMaximumSize(30, 30)
         self.docker = docker
         self.color_slider = ColorSlider(docker)
         self.set_color('left', left_color)
@@ -50,11 +53,11 @@ class ColorSliderLine(QWidget):
         if self.docker.canvas() is not None:
             if self.docker.canvas().view() is not None:
                 self.set_color('left', self.docker.canvas().view().foregroundColor())
-        self.color_slider.update_slider()
+        self.color_slider.update()
 
     @pyqtSlot()
     def slot_update_right_color(self):
         if self.docker.canvas() is not None:
             if self.docker.canvas().view() is not None:
                 self.set_color('right', self.docker.canvas().view().foregroundColor())
-        self.color_slider.update_slider()
+        self.color_slider.update()

@@ -55,6 +55,7 @@ class ColorSliderLine(QWidget):
         self.docker = docker
         self.color_slider = ColorSlider(docker)
         self.layout = QHBoxLayout()
+        self.layout.setContentsMargins(2,2,2,2)
         self.setLayout(self.layout)
         self.layout.addWidget(self.left_button)
         self.layout.addWidget(self.color_slider)
@@ -67,6 +68,7 @@ class ColorSliderLine(QWidget):
         self.left_button.setMaximumSize(30, 30)
         self.right_button.setMinimumSize(30, 30)
         self.right_button.setMaximumSize(30, 30)
+        self.color_slider.setMaximumHeight(30)
 
     def set_color(self, pos, color):
         button_to_set = None

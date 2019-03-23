@@ -106,6 +106,9 @@ class ColorSlider(QWidget):
     def paintEvent(self, event):
         self.update_slider()
 
+    def resizeEvent(self, event): # after resizing the widget, force-redraw the underlying slider
+        self.need_redraw = True
+
     def mouseMoveEvent(self, event):
         pos = event.pos()
         x = pos.x()

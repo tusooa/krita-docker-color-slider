@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=Krita/PythonPlugin
+X-KDE-Library=color_slider_docker
+X-Python-2-Compatible=true
+#X-Krita-Manual=Manual.html
+Name=Color Slider docker
+Comment=A color slider.

@@ -1,3 +1,21 @@
+'''
+    Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
+    
+    This file is part of Krita-docker-color-slider.
+
+    Krita-docker-color-slider is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Krita-docker-color-slider is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Krita-docker-color-slider.  If not, see <https://www.gnu.org/licenses/>.
+'''
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QPixmap, QPainter, QColor
 from PyQt5.QtCore import QPoint
@@ -20,6 +38,13 @@ class ColorSlider(QWidget):
             self.right_color = color
 
     def update_slider(self):
+        '''
+        Update the slider to a gradient between the two colors.
+
+        The painting of the slider comes from the program Krita. The original code can be accessed
+        at the following URL.
+        https://github.com/KDE/krita/blob/master/plugins/dockers/advancedcolorselector/kis_shade_selector_line.cpp
+        '''
         patchCount = self.width()
         patchWidth = 1
         base_hsva = self.docker.managedcolor_to_qcolor(self.left_color).getHsvF()

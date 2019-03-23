@@ -44,7 +44,7 @@ class ColorSliderLine(QWidget):
 
         self.color_slider.set_color(pos, color)
         colorSq = QPixmap(button_to_set.width(), button_to_set.height())
-        colorSq.fill(color.colorForCanvas(self.docker.canvas()))
+        colorSq.fill(self.docker.managedcolor_to_qcolor(color))
         button_to_set.setPixmap(colorSq)
         
 

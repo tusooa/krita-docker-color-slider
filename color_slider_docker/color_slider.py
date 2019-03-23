@@ -21,9 +21,8 @@ class ColorSlider(QWidget):
     def update_slider(self):
         patchCount = self.width()
         patchWidth = 1
-        canvas = self.docker.canvas()
-        base_hsva = self.left_color.colorForCanvas(canvas).getHsvF()
-        dest_hsva = self.right_color.colorForCanvas(canvas).getHsvF()
+        base_hsva = self.docker.managedcolor_to_qcolor(self.left_color).getHsvF()
+        dest_hsva = self.docker.managedcolor_to_qcolor(self.right_color).getHsvF()
         diff_hsva = [(dest_hsva[i] - base_hsva[i]) for i in range(4)]
         if dest_hsva[0] == -1.0:
             diff_hsva[0] = 0
@@ -61,8 +60,7 @@ class ColorSlider(QWidget):
     def mouseReleaseEvent(self, event):
         pos = event.pos()
         color = self.rendered_image.pixelColor(pos)
-        mc = ManagedColor("","","")
-        mc.setComponents([color.blueF(), color.greenF(), color.redF(), 1.0])
+        mc = self.docker.qcolor_to_managedcolor(color)
         if self.docker.canvas() is not None:
             if self.docker.canvas().view() is not None:
                 self.docker.canvas().view().setForeGroundColor(mc)

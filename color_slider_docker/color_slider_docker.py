@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtGui import QPixmap, QIcon, QImage, QPainter, QBrush, QPalette
+from PyQt5.QtGui import QPixmap, QIcon, QImage, QPainter, QBrush, QPalette, QColor
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QAction, QTabWidget, QLineEdit, QSpinBox, QDialogButtonBox, QToolButton, QDialog, QPlainTextEdit, QCompleter, QMenu
 from PyQt5.Qt import Qt, pyqtSignal, pyqtSlot
 import math
@@ -42,5 +42,16 @@ class Color_Slider_Docker(DockWidget):
     def canvasChanged(self, canvas):
         pass
 
+    def qcolor_to_managedcolor(self, qcolor):
+        mc = ManagedColor("RGBA","U16","")
+        mc.setComponents([qcolor.blueF(), qcolor.greenF(), qcolor.redF(), qcolor.alphaF()])
+        return mc
+
+    def managedcolor_to_qcolor(self, managedcolor):
+        [b, g, r, a] = managedcolor.components()
+        return QColor.fromRgbF(r, g, b, a)
+        #return managedcolor.colorForCanvas(self.canvas())
+    
+        
     
 Application.addDockWidgetFactory(DockWidgetFactory("color_slider_docker", DockWidgetFactoryBase.DockRight, Color_Slider_Docker))

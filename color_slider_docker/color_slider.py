@@ -94,8 +94,8 @@ class ColorSlider(QWidget):
         if self.value_x is not None:
             start_x = self.value_x
             start_y = self.height()/2
-            delta_x = self.height()/5
-            delta_y = self.height()/5
+            delta_x = self.height()/3
+            delta_y = self.height()/3
             points = [QPoint(start_x, start_y)
                       , QPoint(start_x - delta_x, start_y + delta_y)
                       , QPoint(start_x + delta_x, start_y + delta_y)]

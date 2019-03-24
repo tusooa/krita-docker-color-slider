@@ -1,3 +1,9 @@
+# Krita-docker-color-slider 
+
+A SAI-like color slider. A demo video is available at
+https://raw.githubusercontent.com/tusooa/krita-docker-color-slider/master/krita-docker-color-slider-demo.mp4
+
+# Copyright Notice
 Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
 
     Krita-docker-color-slider is free software: you can redistribute it and/or modify

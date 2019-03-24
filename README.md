@@ -3,6 +3,10 @@
 A SAI-like color slider. A demo video is available at
 https://raw.githubusercontent.com/tusooa/krita-docker-color-slider/master/krita-docker-color-slider-demo.mp4
 
+## Install
+
+Copy `color_slider_docker` and `kritapykrita_color_slider_docker.desktop` to `pykrita` folder under [Resource folder](https://docs.krita.org/en/KritaFAQ.html#where-are-my-resources-stored). Activate the plugin in Krita using `Settings -> Configure Krita -> Python Plugin Manager`. The plugin is named `Color Slider Docker`.
+
 # Copyright Notice
 Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
 
@@ -23,18 +27,18 @@ When I wrote the code for this plugin, I referred to some of the code of Krita a
 https://github.com/KDE/krita/blob/master/plugins/dockers/advancedcolorselector/kis_shade_selector_line.cpp .
 Its copyright notice is copied as follows:
 
- *  Copyright (c) 2010 Adam Celarek <kdedev at xibo dot at>
- *
- *  This library is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation; version 2.1 of the License.
- *
- *  This library is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+    Copyright (c) 2010 Adam Celarek <kdedev at xibo dot at>
+    
+    This library is free software; you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation; version 2.1 of the License.
+    
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 

@@ -45,7 +45,8 @@ class Color_Slider_Docker(DockWidget):
         self.widget = QWidget()
         self.sliders = []
         self.mainLayout = QHBoxLayout()
-        self.settingsButton = QPushButton('S')
+        # The text on the button for settings
+        self.settingsButton = QPushButton(i18n('S'))
         self.settingsButton.setMaximumSize(30, 30)
         self.mainLayout.addWidget(self.settingsButton)
         self.layout = QVBoxLayout()

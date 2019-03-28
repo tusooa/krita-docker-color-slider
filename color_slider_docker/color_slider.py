@@ -131,7 +131,7 @@ class ColorSlider(QWidget):
         pos = event.pos()
         self.value_x = self.adjust_pos_x(pos.x())
         y = int(self.height() / 2)
-        fixedPos = QPoint(x, y)
+        fixedPos = QPoint(self.value_x, y)
         color = self.rendered_image.pixelColor(fixedPos)
         mc = self.docker.qcolor_to_managedcolor(color)
         if self.docker.canvas() is not None:

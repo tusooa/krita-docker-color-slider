@@ -1,6 +1,6 @@
 '''
     Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
-    
+
     This file is part of Krita-docker-color-slider.
 
     Krita-docker-color-slider is free software: you can redistribute it and/or modify

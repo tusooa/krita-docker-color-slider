@@ -1,6 +1,6 @@
 '''
     Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
-    
+
     This file is part of Krita-docker-color-slider.
 
     Krita-docker-color-slider is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@ import krita
 
 from .color_slider_docker_dialog import ColorSliderDockerDialog
 
+
 class UIColorSliderDocker(object):
     def __init__(self):
         self.kritaInstance = krita.Krita.instance()
@@ -38,7 +39,7 @@ class UIColorSliderDocker(object):
 
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        
+
     def initialize(self, docker):
         self.docker = docker
 
@@ -53,4 +54,3 @@ class UIColorSliderDocker(object):
         self.mainDialog.show()
         self.mainDialog.activateWindow()
         self.mainDialog.exec_()
-        

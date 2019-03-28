@@ -1,6 +1,6 @@
 '''
     Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
-    
+
     This file is part of Krita-docker-color-slider.
 
     Krita-docker-color-slider is free software: you can redistribute it and/or modify
@@ -26,6 +26,7 @@ from krita import *
 from .color_slider_line import ColorSliderLine
 from .ui_color_slider_docker import UIColorSliderDocker
 
+
 class Color_Slider_Docker(DockWidget):
     # Init the docker
 
@@ -34,8 +35,8 @@ class Color_Slider_Docker(DockWidget):
 
         main_program = Krita.instance()
         settings = main_program.readSetting("", "ColorSliderColors",
-                                             "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,1,0.8,0.4,0,"
-                                            + "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,0,0,0,0")
+                                            "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,1,0.8,0.4,0," +
+                                            "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,0,0,0,0")
 
         self.default_left_color = self.qcolor_to_managedcolor(QColor.fromRgbF(0.4, 0.8, 1, 1))
         self.default_right_color = self.qcolor_to_managedcolor(QColor.fromRgbF(0, 0, 0, 1))
@@ -57,15 +58,13 @@ class Color_Slider_Docker(DockWidget):
             widget = ColorSliderLine(leftColor, rightColor, self)
             self.sliders.append(widget)
             self.layout.addWidget(widget)
-            
+
         self.widget.setLayout(self.mainLayout)
         self.setWindowTitle(i18n("Color Slider Docker"))
         self.setWidget(self.widget)
         [x.show() for x in self.sliders]
 
         self.settingsButton.clicked.connect(self.init_ui)
-
-        #self.createActions(main_program.activeWindow())
 
     def settings_changed(self):
         if self.ui.line_edit is not None:
@@ -93,7 +92,7 @@ class Color_Slider_Docker(DockWidget):
     def init_ui(self):
         self.ui = UIColorSliderDocker()
         self.ui.initialize(self)
-        
+
     def createActions(self, window):
         action = window.createAction('color_slider_docker', i18n('Color Slider Docker'))
         action.setToolTip(i18n('Choose colors from a gradient between two colors.'))
@@ -104,15 +103,14 @@ class Color_Slider_Docker(DockWidget):
         setting = ';'.join(
             [self.color_to_settings(line.left) + ',' + self.color_to_settings(line.right)
              for line in self.sliders])
-            
+
         main_program.writeSetting("", "ColorSliderColors", setting)
 
     def color_to_settings(self, managedcolor):
-        return ','.join([managedcolor.colorModel()
-                         , managedcolor.colorDepth()
-                         , managedcolor.colorProfile()
-        ]) + ',' + ','.join(map(str, managedcolor.components()))
-        
+        return ','.join([managedcolor.colorModel(),
+                         managedcolor.colorDepth(),
+                         managedcolor.colorProfile()]) + ',' + ','.join(map(str, managedcolor.components()))
+
     def parseColor(self, array):
         color = ManagedColor(array[0], array[1], array[2])
         color.setComponents([float(x) for x in array[3:]])
@@ -127,10 +125,6 @@ class Color_Slider_Docker(DockWidget):
         return mc
 
     def managedcolor_to_qcolor(self, managedcolor):
-        #[b, g, r, a] = managedcolor.components()
-        #return QColor.fromRgbF(r, g, b, a)
         return managedcolor.colorForCanvas(self.canvas())
-    
-        
-    
+
 Application.addDockWidgetFactory(DockWidgetFactory("color_slider_docker", DockWidgetFactoryBase.DockRight, Color_Slider_Docker))

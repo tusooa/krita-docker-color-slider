@@ -1,6 +1,6 @@
 '''
     Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
-    
+
     This file is part of Krita-docker-color-slider.
 
     Krita-docker-color-slider is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@
     along with Krita-docker-color-slider.  If not, see <https://www.gnu.org/licenses/>.
 '''
 from PyQt5.QtWidgets import QDialog
+
 
 class ColorSliderDockerDialog(QDialog):
     def __init__(self, ui_color_slider, parent=None):

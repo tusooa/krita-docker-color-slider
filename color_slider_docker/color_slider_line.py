@@ -1,6 +1,6 @@
 '''
     Copyright (C) 2019 Tusooa Zhu <tusooa@vista.aero>
-    
+
     This file is part of Krita-docker-color-slider.
 
     Krita-docker-color-slider is free software: you can redistribute it and/or modify
@@ -23,9 +23,10 @@ from PyQt5.QtCore import QRect
 
 from .color_slider import ColorSlider
 
+
 class ColorSliderBtn(QWidget):
     clicked = pyqtSignal()
-    
+
     def __init__(self, parent=None):
         super(ColorSliderBtn, self).__init__(parent)
 
@@ -33,7 +34,7 @@ class ColorSliderBtn(QWidget):
         self.color = qcolor
         self.update()
 
-    def updateColor(self): # FIXME: the color will not display when first initialized
+    def updateColor(self):  # FIXME: the color will not display when first initialized
         colorSq = QPixmap(self.width(), self.height())
         colorSq.fill(self.color)
         image = colorSq.toImage()
@@ -47,6 +48,7 @@ class ColorSliderBtn(QWidget):
     def mouseReleaseEvent(self, event):
         self.clicked.emit()
 
+
 class ColorSliderLine(QWidget):
     def __init__(self, left_color, right_color, docker, parent=None):
         super(ColorSliderLine, self).__init__(parent)
@@ -55,7 +57,7 @@ class ColorSliderLine(QWidget):
         self.docker = docker
         self.color_slider = ColorSlider(docker)
         self.layout = QHBoxLayout()
-        self.layout.setContentsMargins(2,2,2,2)
+        self.layout.setContentsMargins(2, 2, 2, 2)
         self.setLayout(self.layout)
         self.layout.addWidget(self.left_button)
         self.layout.addWidget(self.color_slider)
@@ -82,7 +84,6 @@ class ColorSliderLine(QWidget):
         self.color_slider.set_color(pos, color)
 
         button_to_set.set_color(self.docker.managedcolor_to_qcolor(color))
-        
 
     @pyqtSlot()
     def slot_update_left_color(self):
@@ -91,7 +92,7 @@ class ColorSliderLine(QWidget):
                 mc = self.docker.canvas().view().foregroundColor()
                 print(mc.colorModel(), mc.colorDepth(), mc.colorProfile(), mc.components())
                 self.set_color('left', self.docker.canvas().view().foregroundColor())
-        self.color_slider.value_x = 0 # set the cursor to the left-most
+        self.color_slider.value_x = 0  # set the cursor to the left-most
         self.color_slider.update()
         self.docker.writeSettings()
 
@@ -103,5 +104,3 @@ class ColorSliderLine(QWidget):
         self.color_slider.value_x = self.color_slider.width() - 1
         self.color_slider.update()
         self.docker.writeSettings()
-
-        

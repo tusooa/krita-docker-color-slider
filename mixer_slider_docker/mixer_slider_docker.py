@@ -64,7 +64,7 @@ class MixerSliderDocker(DockWidget):
             self.layout.addWidget(widget)
 
         self.widget.setLayout(self.top_layout)
-        self.setWindowTitle(i18n("Color Slider Docker"))
+        self.setWindowTitle(i18n("Mixer Slider Docker"))
         self.setWidget(self.widget)
         [x.show() for x in self.sliders]
 

@@ -44,21 +44,21 @@ class MixerSliderDocker(DockWidget):
         self.widget = QWidget()
         self.sliders = []
         self.top_layout = QVBoxLayout()
-        self.mainLayout = QHBoxLayout()
-        self.top_layout.addLayout(self.mainLayout)
+        self.main_layout = QHBoxLayout()
+        self.top_layout.addLayout(self.main_layout)
         self.top_layout.addStretch(0)
         # The text on the button for settings
-        self.settingsButton = QPushButton(i18n('S'))
-        self.settingsButton.setMaximumSize(30, 30)
-        self.mainLayout.addWidget(self.settingsButton)
+        self.settings_button = QPushButton(i18n('S'))
+        self.settings_button.setMaximumSize(30, 30)
+        self.main_layout.addWidget(self.settings_button)
         self.layout = QVBoxLayout()
         self.layout.setSpacing(0)
-        self.mainLayout.addLayout(self.layout)
+        self.main_layout.addLayout(self.layout)
         for line in settings.split(";"):
             colors = line.split(',')
-            leftColor = self.parseColor(colors[0:7])
-            rightColor = self.parseColor(colors[7:])
-            widget = SliderLine(leftColor, rightColor, self)
+            left_color = self.parse_color(colors[0:7])
+            right_color = self.parse_color(colors[7:])
+            widget = SliderLine(left_color, right_color, self)
             self.sliders.append(widget)
             self.layout.addWidget(widget)
 
@@ -67,7 +67,7 @@ class MixerSliderDocker(DockWidget):
         self.setWidget(self.widget)
         [x.show() for x in self.sliders]
 
-        self.settingsButton.clicked.connect(self.init_ui)
+        self.settings_button.clicked.connect(self.init_ui)
 
     def settings_changed(self):
         if self.ui.line_edit is not None:
@@ -88,8 +88,8 @@ class MixerSliderDocker(DockWidget):
     def get_color_space(self):
         if self.canvas() is not None:
             if self.canvas().view() is not None:
-                canvasColor = self.canvas().view().foregroundColor()
-                return ManagedColor(canvasColor.colorModel(), canvasColor.colorDepth(), canvasColor.colorProfile())
+                canvas_color = self.canvas().view().foregroundColor()
+                return ManagedColor(canvas_color.colorModel(), canvas_color.colorDepth(), canvas_color.colorProfile())
         return ManagedColor('RGBA', 'U8', 'sRGB-elle-V2-srgbtrc.icc')
 
     def init_ui(self):
@@ -109,7 +109,7 @@ class MixerSliderDocker(DockWidget):
                          managedcolor.colorDepth(),
                          managedcolor.colorProfile()]) + ',' + ','.join(map(str, managedcolor.components()))
 
-    def parseColor(self, array):
+    def parse_color(self, array):
         color = ManagedColor(array[0], array[1], array[2])
         color.setComponents([float(x) for x in array[3:]])
         return color

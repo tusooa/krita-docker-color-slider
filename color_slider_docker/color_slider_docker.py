@@ -35,8 +35,8 @@ class Color_Slider_Docker(DockWidget):
 
         main_program = Krita.instance()
         settings = main_program.readSetting("", "ColorSliderColors",
-                                            "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,1,0.8,0.4,0," +
-                                            "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,0,0,0,0")
+                                            "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,1,0.8,0.4,1," +
+                                            "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,0,0,0,1")  # alpha=1 == non-transparent
 
         self.default_left_color = self.qcolor_to_managedcolor(QColor.fromRgbF(0.4, 0.8, 1, 1))
         self.default_right_color = self.qcolor_to_managedcolor(QColor.fromRgbF(0, 0, 0, 1))
@@ -93,11 +93,6 @@ class Color_Slider_Docker(DockWidget):
     def init_ui(self):
         self.ui = UIColorSliderDocker()
         self.ui.initialize(self)
-
-    def createActions(self, window):
-        action = window.createAction('color_slider_docker', i18n('Color Slider Docker'))
-        action.setToolTip(i18n('Choose colors from a gradient between two colors.'))
-        action.triggered.connect(self.init_ui)
 
     def writeSettings(self):
         main_program = Krita.instance()

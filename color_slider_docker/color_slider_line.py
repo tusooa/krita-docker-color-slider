@@ -34,7 +34,7 @@ class ColorSliderBtn(QWidget):
         self.color = qcolor
         self.update()
 
-    def updateColor(self):  # FIXME: the color will not display when first initialized
+    def updateColor(self):
         colorSq = QPixmap(self.width(), self.height())
         colorSq.fill(self.color)
         image = colorSq.toImage()

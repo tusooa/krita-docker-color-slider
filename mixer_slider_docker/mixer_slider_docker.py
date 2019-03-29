@@ -44,13 +44,16 @@ class MixerSliderDocker(DockWidget):
         # make base-widget and layout
         self.widget = QWidget()
         self.sliders = []
+        self.top_layout = QVBoxLayout()
         self.mainLayout = QHBoxLayout()
+        self.top_layout.addLayout(self.mainLayout)
+        self.top_layout.addStretch(0)
         # The text on the button for settings
         self.settingsButton = QPushButton(i18n('S'))
         self.settingsButton.setMaximumSize(30, 30)
         self.mainLayout.addWidget(self.settingsButton)
         self.layout = QVBoxLayout()
-        self.layout.setSpacing(1)
+        self.layout.setSpacing(0)
         self.mainLayout.addLayout(self.layout)
         for line in settings.split(";"):
             colors = line.split(',')
@@ -60,7 +63,7 @@ class MixerSliderDocker(DockWidget):
             self.sliders.append(widget)
             self.layout.addWidget(widget)
 
-        self.widget.setLayout(self.mainLayout)
+        self.widget.setLayout(self.top_layout)
         self.setWindowTitle(i18n("Color Slider Docker"))
         self.setWidget(self.widget)
         [x.show() for x in self.sliders]

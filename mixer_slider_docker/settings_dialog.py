@@ -16,4 +16,19 @@
     You should have received a copy of the GNU General Public License
     along with Krita-docker-color-slider.  If not, see <https://www.gnu.org/licenses/>.
 '''
-from .color_slider_docker import *
+from PyQt5.QtWidgets import QDialog
+
+
+class SettingsDialog(QDialog):
+    def __init__(self, ui_mixer_slider, parent=None):
+        super(SettingsDialog, self).__init__(parent)
+
+        self.ui_mixer_slider = ui_mixer_slider
+
+    def accept(self):
+        self.ui_mixer_slider.docker.settings_changed()
+
+        super(SettingsDialog, self).accept()
+
+    def closeEvent(self, event):
+        event.accept()

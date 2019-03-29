@@ -56,8 +56,7 @@ class ColorSlider(QWidget):
         https://github.com/KDE/krita/blob/master/plugins/dockers/advancedcolorselector/kis_shade_selector_line.cpp
         '''
         if self.need_redraw:
-            patchCount = self.width()
-            patchWidth = 1
+            patch_count = self.width()
             base_hsva = self.docker.managedcolor_to_qcolor(self.left_color).getHsvF()
             dest_hsva = self.docker.managedcolor_to_qcolor(self.right_color).getHsvF()
             diff_hsva = [(dest_hsva[i] - base_hsva[i]) for i in range(4)]
@@ -68,7 +67,7 @@ class ColorSlider(QWidget):
             elif diff_hsva[0] < -0.5:
                 diff_hsva[0] = diff_hsva[0] + 1.0
 
-            step_hsva = [x / patchCount for x in diff_hsva]
+            step_hsva = [x / patch_count for x in diff_hsva]
 
             print('base: ', base_hsva)
             print('dest: ', dest_hsva)
@@ -76,7 +75,7 @@ class ColorSlider(QWidget):
             self.slider_pixmap = QPixmap(self.width(), self.height())
             painter = QPainter(self.slider_pixmap)
 
-            for i in range(patchCount):
+            for i in range(patch_count):
                 hue = base_hsva[0] + i * step_hsva[0]
                 while hue < 0.0:
                     hue += 1.0
@@ -115,7 +114,7 @@ class ColorSlider(QWidget):
     def resizeEvent(self, event):  # after resizing the widget, force-redraw the underlying slider
         self.need_redraw = True
 
-    def adjust_pos_x(self, x):
+    def adjust_pos_x(self, x):  # adjust the x to make it in the range of [0, width - 1]
         if x < 0:
             return 0
         if x >= self.width():

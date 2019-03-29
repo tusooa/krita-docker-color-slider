@@ -24,11 +24,11 @@ from PyQt5.QtCore import QRect
 from .color_slider import ColorSlider
 
 
-class ColorSliderBtn(QWidget):
+class SliderBtn(QWidget):
     clicked = pyqtSignal()
 
     def __init__(self, parent=None):
-        super(ColorSliderBtn, self).__init__(parent)
+        super(SliderBtn, self).__init__(parent)
 
     def set_color(self, qcolor):
         self.color = qcolor
@@ -49,11 +49,11 @@ class ColorSliderBtn(QWidget):
         self.clicked.emit()
 
 
-class ColorSliderLine(QWidget):
+class SliderLine(QWidget):
     def __init__(self, left_color, right_color, docker, parent=None):
-        super(ColorSliderLine, self).__init__(parent)
-        self.left_button = ColorSliderBtn()
-        self.right_button = ColorSliderBtn()
+        super(SliderLine, self).__init__(parent)
+        self.left_button = SliderBtn()
+        self.right_button = SliderBtn()
         self.docker = docker
         self.color_slider = ColorSlider(docker)
         self.layout = QHBoxLayout()
@@ -89,8 +89,6 @@ class ColorSliderLine(QWidget):
     def slot_update_left_color(self):
         if self.docker.canvas() is not None:
             if self.docker.canvas().view() is not None:
-                mc = self.docker.canvas().view().foregroundColor()
-                print(mc.colorModel(), mc.colorDepth(), mc.colorProfile(), mc.components())
                 self.set_color('left', self.docker.canvas().view().foregroundColor())
         self.color_slider.value_x = 0  # set the cursor to the left-most
         self.color_slider.update()

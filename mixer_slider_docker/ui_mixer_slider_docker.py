@@ -21,24 +21,24 @@ from PyQt5.QtGui import QIntValidator
 from PyQt5.QtCore import Qt
 import krita
 
-from .color_slider_docker_dialog import ColorSliderDockerDialog
+from .settings_dialog import SettingsDialog
 
 
-class UIColorSliderDocker(object):
+class UIMixerSliderDocker(object):
     def __init__(self):
-        self.kritaInstance = krita.Krita.instance()
-        self.mainDialog = ColorSliderDockerDialog(self, self.kritaInstance.activeWindow().qwindow())
+        self.krita_instance = krita.Krita.instance()
+        self.main_dialog = SettingsDialog(self, self.krita_instance.activeWindow().qwindow())
 
-        self.buttonBox = QDialogButtonBox(self.mainDialog)
-        self.vbox = QVBoxLayout(self.mainDialog)
-        self.hbox = QHBoxLayout(self.mainDialog)
+        self.button_box = QDialogButtonBox(self.main_dialog)
+        self.vbox = QVBoxLayout(self.main_dialog)
+        self.hbox = QHBoxLayout(self.main_dialog)
         self.line_edit = None
 
-        self.buttonBox.accepted.connect(self.mainDialog.accept)
-        self.buttonBox.rejected.connect(self.mainDialog.reject)
+        self.button_box.accepted.connect(self.main_dialog.accept)
+        self.button_box.rejected.connect(self.main_dialog.reject)
 
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.button_box.setOrientation(Qt.Horizontal)
+        self.button_box.setStandardButtons(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
 
     def initialize(self, docker):
         self.docker = docker
@@ -49,8 +49,8 @@ class UIColorSliderDocker(object):
         self.line_edit.setValidator(QIntValidator(1, 8))
         self.hbox.addWidget(self.line_edit)
 
-        self.vbox.addWidget(self.buttonBox)
+        self.vbox.addWidget(self.button_box)
 
-        self.mainDialog.show()
-        self.mainDialog.activateWindow()
-        self.mainDialog.exec_()
+        self.main_dialog.show()
+        self.main_dialog.activateWindow()
+        self.main_dialog.exec_()

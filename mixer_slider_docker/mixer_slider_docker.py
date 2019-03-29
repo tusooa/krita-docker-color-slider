@@ -23,18 +23,18 @@ from PyQt5.Qt import Qt, pyqtSignal, pyqtSlot
 import math
 from krita import *
 
-from .color_slider_line import ColorSliderLine
-from .ui_color_slider_docker import UIColorSliderDocker
+from .slider_line import SliderLine
+from .ui_mixer_slider_docker import UIMixerSliderDocker
 
 
-class Color_Slider_Docker(DockWidget):
+class MixerSliderDocker(DockWidget):
     # Init the docker
 
     def __init__(self):
-        super(Color_Slider_Docker, self).__init__()
+        super(MixerSliderDocker, self).__init__()
 
         main_program = Krita.instance()
-        settings = main_program.readSetting("", "ColorSliderColors",
+        settings = main_program.readSetting("", "MixerSliderColors",
                                             "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,1,0.8,0.4,1," +
                                             "RGBA,U8,sRGB-elle-V2-srgbtrc.icc,0,0,0,1")  # alpha=1 == non-transparent
 
@@ -56,7 +56,7 @@ class Color_Slider_Docker(DockWidget):
             colors = line.split(',')
             leftColor = self.parseColor(colors[0:7])
             rightColor = self.parseColor(colors[7:])
-            widget = ColorSliderLine(leftColor, rightColor, self)
+            widget = SliderLine(leftColor, rightColor, self)
             self.sliders.append(widget)
             self.layout.addWidget(widget)
 
@@ -78,7 +78,7 @@ class Color_Slider_Docker(DockWidget):
                 self.sliders = self.sliders[0:num_sliders]
             elif len(self.sliders) < num_sliders:
                 for i in range(num_sliders - len(self.sliders)):
-                    widget = ColorSliderLine(self.default_left_color, self.default_right_color, self)
+                    widget = SliderLine(self.default_left_color, self.default_right_color, self)
                     self.sliders.append(widget)
                     self.layout.addWidget(widget)
         self.writeSettings()
@@ -91,7 +91,7 @@ class Color_Slider_Docker(DockWidget):
         return ManagedColor('RGBA', 'U8', 'sRGB-elle-V2-srgbtrc.icc')
 
     def init_ui(self):
-        self.ui = UIColorSliderDocker()
+        self.ui = UIMixerSliderDocker()
         self.ui.initialize(self)
 
     def writeSettings(self):
@@ -100,7 +100,7 @@ class Color_Slider_Docker(DockWidget):
             [self.color_to_settings(line.left) + ',' + self.color_to_settings(line.right)
              for line in self.sliders])
 
-        main_program.writeSetting("", "ColorSliderColors", setting)
+        main_program.writeSetting("", "MixerSliderColors", setting)
 
     def color_to_settings(self, managedcolor):
         return ','.join([managedcolor.colorModel(),
@@ -123,4 +123,4 @@ class Color_Slider_Docker(DockWidget):
     def managedcolor_to_qcolor(self, managedcolor):
         return managedcolor.colorForCanvas(self.canvas())
 
-Application.addDockWidgetFactory(DockWidgetFactory("color_slider_docker", DockWidgetFactoryBase.DockRight, Color_Slider_Docker))
+Application.addDockWidgetFactory(DockWidgetFactory("mixer_slider_docker", DockWidgetFactoryBase.DockRight, MixerSliderDocker))

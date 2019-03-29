@@ -17,10 +17,9 @@
     along with Krita-docker-color-slider.  If not, see <https://www.gnu.org/licenses/>.
 '''
 import sys
-from PyQt5.QtGui import QPixmap, QIcon, QImage, QPainter, QBrush, QPalette, QColor
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QAction, QTabWidget, QLineEdit, QSpinBox, QDialogButtonBox, QToolButton, QDialog, QPlainTextEdit, QCompleter, QMenu, QPushButton
-from PyQt5.Qt import Qt, pyqtSignal, pyqtSlot
-import math
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton
+
 from krita import *
 
 from .slider_line import SliderLine

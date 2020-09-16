@@ -1,4 +1,7 @@
-# Krita-docker-color-slider 
+# [ ARCHIVED ] Krita-docker-color-slider 
+
+This is archived because it is merged into the official Krita repository:
+https://invent.kde.org/graphics/krita/-/tree/master/plugins/python/mixer_slider_docker
 
 A SAI-like color slider. A demo video is available at
 https://raw.githubusercontent.com/tusooa/krita-docker-color-slider/master/krita-docker-color-slider-demo.mp4
